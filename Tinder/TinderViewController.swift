@@ -20,7 +20,6 @@ class TinderViewController: UIViewController {
         
         PFGeoPoint.geoPointForCurrentLocationInBackground { (geopoint: PFGeoPoint!, error: NSError!) -> Void in
             if error == nil {
-                NSLog("My Point: \(geopoint)")
                 var user = PFUser.currentUser()
                 user["location"] = geopoint
                 
@@ -33,12 +32,19 @@ class TinderViewController: UIViewController {
                 // Final list of objects
                 query.findObjectsInBackgroundWithBlock({ (users, error) -> Void in
                     
-                    var accepted = PFUser.currentUser()["accepted"] as [String]
-                    var rejected = PFUser.currentUser()["rejected"] as [String]
+                    var accepted = [String]()
+                    var rejected = [String]()
+                    
+                    if (PFUser.currentUser()["accepted"] != nil) {
+                        accepted = PFUser.currentUser()["accepted"] as [String]
+                    }
+                    if (PFUser.currentUser()["rejected"] != nil) {
+                        accepted = PFUser.currentUser()["rejected"] as [String]
+                    }
                     
                     for user in users {
-                        var gender1 = user["gender"]! as? NSString
-                        var gender2 = PFUser.currentUser()["interestedIn"]! as? NSString
+                        var gender1 = user["gender"] as? NSString
+                        var gender2 = PFUser.currentUser()["interestedIn"] as? NSString
                         
                         if (gender1 == gender2) && (PFUser.currentUser().username != user.username) && (!contains(accepted, user.username)) && (!contains(rejected, user.username)) {
                             self.usernames.append(user.username)
@@ -47,7 +53,7 @@ class TinderViewController: UIViewController {
                     }
                     
                     //Creating an Image programmatically
-                    var image:UIImageView = UIImageView(frame: CGRectMake(0,0,self.view.frame.width, self.view.frame.height))
+                    var image:UIImageView = UIImageView(frame: CGRectMake(0,64,self.view.frame.width, self.view.frame.height))
                     image.image = UIImage(data: self.userImages[0])
                     image.contentMode = UIViewContentMode.ScaleAspectFit
                     self.view.addSubview(image)
@@ -98,7 +104,7 @@ class TinderViewController: UIViewController {
             
             if currentUser < userImages.count {
                 //Creating an Image programmatically
-                var image:UIImageView = UIImageView(frame: CGRectMake(0,0,self.view.frame.width, self.view.frame.height))
+                var image:UIImageView = UIImageView(frame: CGRectMake(0,64,self.view.frame.width, self.view.frame.height))
                 image.image = UIImage(data: self.userImages[currentUser])
                 image.contentMode = UIViewContentMode.ScaleAspectFit
                 self.view.addSubview(image)

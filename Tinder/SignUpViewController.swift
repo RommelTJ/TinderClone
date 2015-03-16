@@ -22,6 +22,8 @@ class SignUpViewController: UIViewController {
             user["interestedIn"] = "male"
         }
         user.saveInBackground()
+        
+        self.performSegueWithIdentifier("signedUp", sender: self)
     }
     
     override func viewDidLoad() {
@@ -43,6 +45,7 @@ class SignUpViewController: UIViewController {
             FBRequestConnection.startForMeWithCompletionHandler({ (connection, result, error) -> Void in
                 user["gender"] = result["gender"]
                 user["name"] = result["name"]
+                user["email"] = result["email"]
                 user.saveInBackground()
             })
         }

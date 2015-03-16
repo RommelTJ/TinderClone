@@ -11,10 +11,8 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var myLoginCancelledLabel: UILabel!
     
-    var fbLoginView:FBLoginView = FBLoginView(readPermissions: ["public_profile"])
-    
     @IBAction func doSignIn(sender: AnyObject) {
-        var permissions = ["public_profile"]
+        var permissions = ["email", "public_profile"]
 
         self.myLoginCancelledLabel.alpha = 0
         PFFacebookUtils.logInWithPermissions(permissions, block: {
@@ -27,7 +25,7 @@ class ViewController: UIViewController {
                 self.performSegueWithIdentifier("signUp", sender: self)
             } else {
                 NSLog("User logged in through Facebook!")
-                //TODO
+                self.performSegueWithIdentifier("signUp", sender: self)
             }
         })
     }
