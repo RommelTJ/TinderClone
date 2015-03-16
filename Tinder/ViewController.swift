@@ -12,7 +12,14 @@ class ViewController: UIViewController {
                             
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        var push = PFPush()
+        push.setMessage("Hello Notification!")
+        push.sendPushInBackgroundWithBlock { (success: Bool!, error: NSError!) -> Void in
+            if error == nil {
+                NSLog("We were succesful!")
+            }
+        }
         
         var permissions = ["public_profile"]
         
