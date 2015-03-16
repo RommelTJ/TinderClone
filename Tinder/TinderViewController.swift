@@ -32,21 +32,21 @@ class TinderViewController: UIViewController {
                 query.limit = 10
                 // Final list of objects
                 query.findObjectsInBackgroundWithBlock({ (users, error) -> Void in
+                    
+                    var accepted = PFUser.currentUser()["accepted"] as [String]
+                    var rejected = PFUser.currentUser()["rejected"] as [String]
+                    
                     for user in users {
                         var gender1 = user["gender"]! as? NSString
                         var gender2 = PFUser.currentUser()["interestedIn"]! as? NSString
                         
-                        if (gender1 == gender2) && (PFUser.currentUser().username != user.username) {
-                            NSLog("here1")
+                        if (gender1 == gender2) && (PFUser.currentUser().username != user.username) && (!contains(accepted, user.username)) && (!contains(rejected, user.username)) {
                             self.usernames.append(user.username)
-                            NSLog("here2")
                             self.userImages.append(user["image"] as NSData)
-                            NSLog("here3")
                         }
                     }
                     
                     //Creating an Image programmatically
-                    NSLog("Here4")
                     var image:UIImageView = UIImageView(frame: CGRectMake(0,0,self.view.frame.width, self.view.frame.height))
                     image.image = UIImage(data: self.userImages[0])
                     image.contentMode = UIViewContentMode.ScaleAspectFit
@@ -78,16 +78,22 @@ class TinderViewController: UIViewController {
         var stretch:CGAffineTransform = CGAffineTransformScale(rotation, scale, scale)
         label.transform = stretch
         
-        //Check if the label is to the left or right
-        if (label.center.x < 100) {
-            NSLog("Not chosen!")
-        } else if (label.center.x > self.view.bounds.width-100) {
-            NSLog("Chosen")
-        }
-        
         //Reset label
         if (gesture.state == UIGestureRecognizerState.Ended) {
-            currentUser++
+            
+            //Check if the label is to the left or right
+            if (label.center.x < 100) {
+                //Not Chosen!
+                PFUser.currentUser().addUniqueObject(usernames[currentUser], forKey: "rejected")
+                PFUser.currentUser().saveInBackground()
+                currentUser++
+            } else if (label.center.x > self.view.bounds.width-100) {
+                //Chosen
+                PFUser.currentUser().addUniqueObject(usernames[currentUser], forKey: "accepted")
+                PFUser.currentUser().saveInBackground()
+                currentUser++
+            }
+            
             label.removeFromSuperview()
             
             if currentUser < userImages.count {
