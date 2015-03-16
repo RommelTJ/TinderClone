@@ -16,10 +16,10 @@ class SignUpViewController: UIViewController {
         var user = PFUser.currentUser()
         if myGenderSwitch.on {
             //Looking for Women
-            user["interestedIn"] = "Female"
+            user["interestedIn"] = "female"
         } else {
             //Looking for Men.
-            user["interestedIn"] = "Male"
+            user["interestedIn"] = "male"
         }
         user.saveInBackground()
     }

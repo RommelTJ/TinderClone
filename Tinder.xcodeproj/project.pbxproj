@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		775BE4C61AB72D79000B1166 /* Blank_woman_placeholder.svg.png in Resources */ = {isa = PBXBuildFile; fileRef = 775BE4C51AB72D79000B1166 /* Blank_woman_placeholder.svg.png */; };
 		77E9082F1AB676D600EA8FAF /* LogInWithFacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E9082E1AB676D600EA8FAF /* LogInWithFacebook.png */; };
 		77E908311AB6876700EA8FAF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E908301AB6876700EA8FAF /* SignUpViewController.swift */; };
 		77E908331AB698C800EA8FAF /* TinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E908321AB698C800EA8FAF /* TinderViewController.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		775BE4C51AB72D79000B1166 /* Blank_woman_placeholder.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blank_woman_placeholder.svg.png; sourceTree = "<group>"; };
 		77E9082E1AB676D600EA8FAF /* LogInWithFacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogInWithFacebook.png; sourceTree = "<group>"; };
 		77E908301AB6876700EA8FAF /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		77E908321AB698C800EA8FAF /* TinderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TinderViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				C86B0D9C19B611D800F8DF49 /* ViewController.swift */,
 				C86B0D9E19B611D800F8DF49 /* Main.storyboard */,
 				77E908321AB698C800EA8FAF /* TinderViewController.swift */,
+				775BE4C51AB72D79000B1166 /* Blank_woman_placeholder.svg.png */,
 				77E908301AB6876700EA8FAF /* SignUpViewController.swift */,
 				77E9082E1AB676D600EA8FAF /* LogInWithFacebook.png */,
 				C86B0DA119B611D800F8DF49 /* Images.xcassets */,
@@ -265,6 +268,7 @@
 				77E9082F1AB676D600EA8FAF /* LogInWithFacebook.png in Resources */,
 				C86B0DA019B611D800F8DF49 /* Main.storyboard in Resources */,
 				C86B0DA219B611D800F8DF49 /* Images.xcassets in Resources */,
+				775BE4C61AB72D79000B1166 /* Blank_woman_placeholder.svg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
