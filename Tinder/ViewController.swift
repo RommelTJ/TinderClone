@@ -9,32 +9,44 @@
 import UIKit
 
 class ViewController: UIViewController {
-                            
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        var push = PFPush()
-        push.setMessage("Hello Notification!")
-        push.sendPushInBackgroundWithBlock { (success: Bool!, error: NSError!) -> Void in
-            if error == nil {
-                NSLog("We were succesful!")
-            }
-        }
-        
+    @IBOutlet weak var myLoginCancelledLabel: UILabel!
+    
+    var fbLoginView:FBLoginView = FBLoginView(readPermissions: ["public_profile"])
+    
+    @IBAction func doSignIn(sender: AnyObject) {
         var permissions = ["public_profile"]
-        
-        // Update - added , block:
-        
+
+        self.myLoginCancelledLabel.alpha = 0
         PFFacebookUtils.logInWithPermissions(permissions, block: {
             (user: PFUser!, error: NSError!) -> Void in
             if user == nil {
                 NSLog("Uh oh. The user cancelled the Facebook login.")
+                self.myLoginCancelledLabel.alpha = 1
             } else if user.isNew {
                 NSLog("User signed up and logged in through Facebook!")
+                self.performSegueWithIdentifier("signUp", sender: self)
             } else {
                 NSLog("User logged in through Facebook!")
+                //TODO
             }
         })
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if PFUser.currentUser() != nil {
+            NSLog("User is logged in")
+        }
+        
+//        var push = PFPush()
+//        push.setMessage("Hello Notification!")
+//        push.sendPushInBackgroundWithBlock { (success: Bool!, error: NSError!) -> Void in
+//            if error == nil {
+//                NSLog("We were succesful!")
+//            }
+//        }
+
         
         
     }

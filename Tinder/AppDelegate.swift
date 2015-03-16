@@ -28,11 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Parse.setApplicationId("REDACTED", clientKey: "REDACTED")
         
-        var pushSettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert, categories: nil)
-        application.registerUserNotificationSettings(pushSettings)
-        application.registerForRemoteNotifications()
-        
         PFFacebookUtils.initializeFacebook()
+        
+//        var pushSettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert, categories: nil)
+//        application.registerUserNotificationSettings(pushSettings)
+//        application.registerForRemoteNotifications()
         
         return true
     }
@@ -77,22 +77,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
-    /*  Changed
-
-        func application(application: UIApplication, openURL url: NSURL,
-            sourceApplication: NSString, annotation: AnyObject) -> Bool {
-         
-        to
-
-        func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-
-    */
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        
-                return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication,
-                withSession:PFFacebookUtils.session())
+        return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication, withSession:PFFacebookUtils.session())
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
